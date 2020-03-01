@@ -14,5 +14,9 @@
   },
   "dependencies": {
     "vue": "^2.6.11"
+  },
+  "scripts": {
+    "serve": "webpack-dev-server --open",
+    "build": "webpack"
   }
 }
