@@ -1,5 +1,7 @@
-const path = require('path');
-const outputPath = path.resolve(__dirname, 'dist');
+const path = require('path')
+const outputPath = path.resolve(__dirname, 'dist')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const WriteFilePlugin = require('write-file-webpack-plugin')
 
 module.exports = {
   mode: 'development',
@@ -23,5 +25,18 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new CopyWebpackPlugin(
+      [
+        {
+          context: "src",
+          from: "**/*.html",
+          to: outputPath
+        }
+      ],
+      { copyUnmodified: true }
+    ),
+    new WriteFilePlugin()
+  ],
 };
