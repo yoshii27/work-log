@@ -2,6 +2,7 @@ const path = require('path')
 const outputPath = path.resolve(__dirname, 'dist')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const WriteFilePlugin = require('write-file-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   mode: 'development',
@@ -15,6 +16,11 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.vue$/,
+        exclude: /node_modules/,
+        loader: 'vue-loader',
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -37,6 +43,7 @@ module.exports = {
       ],
       { copyUnmodified: true }
     ),
-    new WriteFilePlugin()
+    new WriteFilePlugin(),
+    new VueLoaderPlugin()
   ],
 };
