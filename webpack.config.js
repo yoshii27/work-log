@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin")
 
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -66,6 +67,11 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js' // 'vue/dist/vue.common.js' webpack 1 用
+    }
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
@@ -73,6 +79,7 @@ module.exports = {
       chunks: ['js/index', 'css/main'],
       templateParameters: '/',
     }),
+    new FaviconsWebpackPlugin('./src/favicon.png'),
     new FixStyleOnlyEntriesPlugin(),
     new MiniCssExtractPlugin({
       filename: './[name].css',
