@@ -1,15 +1,16 @@
 const path = require('path')
 const outputPath = path.resolve(__dirname, 'dist')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const WriteFilePlugin = require('write-file-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   mode: 'development',
   entry: './src/js/index.js',
   output: {
-    path: `${outputPath}/js`,
-    filename: 'bundle.js'
+    path: `${outputPath}`,
+    filename: './js/bundle.js'
   },
   devServer: {
     contentBase: outputPath
@@ -33,17 +34,11 @@ module.exports = {
     ]
   },
   plugins: [
-    new CopyWebpackPlugin(
-      [
-        {
-          context: "src",
-          from: "**/*.html",
-          to: outputPath
-        }
-      ],
-      { copyUnmodified: true }
-    ),
-    new WriteFilePlugin(),
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      filename: './index.html',
+      templateParameters: '/',
+    }),
     new VueLoaderPlugin()
   ],
 };
