@@ -77,6 +77,12 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: './[name].css',
     }),
+    new CopyWebpackPlugin([
+      {
+        from: './src/images/',
+        to: './images/',
+      },
+    ]),
     new VueLoaderPlugin()
   ],
 };
