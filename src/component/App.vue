@@ -1,5 +1,3 @@
 <template>
-  <div id="app">
-    <p>hello from vue</p>
-  </div>
+  <p>hello from vue</p>
 </template>
